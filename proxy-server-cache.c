@@ -43,8 +43,49 @@ int main(int argc, char *argv[])
     int client_socketId, client_len;             // client_socketId == to store the client socket id
     struct sockaddr_in server_addr, client_addr; // Address of client and server to be assigned
 
-    sem_init(&semaphore, 0, MAX_CLIENTS); // Initializing seamaphore and lock
-    pthread_mutex_init(&lock, NULL);      // Initializing lock for cache}
+    sem_init(&seamaphore, 0, MAX_CLIENTS); // Initializing seamaphore and lock
+    pthread_mutex_init(&lock, NULL);       // Initializing lock for cache
+
+    if (argc == 2) // checking whether two arguments are received or not
+    {
+        port_number = atoi(argv[1]);
+    }
+    else
+    {
+        printf("Too few arguments\n");
+        exit(1);
+    }
+
+    printf("Setting Proxy Server Port : %d\n", port_number);
+
+    int reuse = 1;
+    if (setsockopt(proxy_socketId, SOL_SOCKET, SO_REUSEADDR, (const char *)&reuse, sizeof(reuse)) < 0)
+        perror("setsockopt(SO_REUSEADDR) failed\n");
+
+    bzero((char *)&server_addr, sizeof(server_addr));
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(port_number); // Assigning port to the Proxy
+    server_addr.sin_addr.s_addr = INADDR_ANY;  // Any available adress assigned
+
+    // Binding the socket
+    if (bind(proxy_socketId, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0)
+    {
+        perror("Port is not free\n");
+        exit(1);
+    }
+    printf("Binding on port: %d\n", port_number);
+
+      // Proxy socket listening to the requests
+	int listen_status = listen(proxy_socketId, MAX_CLIENTS);
+
+	if(listen_status < 0 )
+	{
+		perror("Error while Listening !\n");
+		exit(1);
+	}
+
+	int i = 0; // Iterator for thread_id (tid) and Accepted Client_Socket for each thread
+	int Connected_socketId[MAX_CLIENTS];   // This array stores socket descriptors of connected clients
 
     // Infinite Loop for accepting connections
     while (1)
@@ -78,4 +119,3 @@ int main(int argc, char *argv[])
     close(proxy_socketId); // Close socket
     return 0;
 }
-
