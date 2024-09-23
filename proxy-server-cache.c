@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
         client_socketId = accept(proxy_socketId, (struct sockaddr *)&client_addr, (socklen_t *)&client_len); // Accepts connection
         if (client_socketId < 0)
         {
-            fprintf(stderr, "Error in Accepting connection !\n");
+            printf(stderr, "Error in Accepting connection !\n");
             exit(1);
         }
         else
