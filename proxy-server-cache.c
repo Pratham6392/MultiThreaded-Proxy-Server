@@ -16,6 +16,7 @@
 #include <semaphore.h>
 #include <time.h>
 #include <socket.h>
+#include <netinet/in.h>
 
 #define MAX_BYTES 4096                  // max allowed size of request/response
 #define MAX_CLIENTS 400                 // max number of client requests served at a time
@@ -124,7 +125,7 @@ int connectRemoteServer(char *host_addr, int port_num)
     server_addr.sin_family = AF_INET;
     server_addr.sin_port = htons(port_num);
 
-    bcopy((char *)host->h_addr, (char *)&server_addr.sin_addr.s_addr, host->h_length);
+    bcopy((char *)&host->h_addr, (char *)&server_addr.sin_addr.s_addr, host->h_length);
 
     // Connect to Remote server ----------------------------------------------------
 
@@ -317,7 +318,7 @@ void *thread_fn(void *socketNew)
         {
             bzero(buffer, MAX_BYTES);
             if (!strcmp(request->method, "GET"))
-            { 
+            {
 
                 if (request->host && request->path && (checkHTTPversion(request->version) == 1))
                 {
