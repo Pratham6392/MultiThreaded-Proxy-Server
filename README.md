@@ -20,3 +20,5 @@
     It creates an execuatble file proxy.
     Run server using command:
 
+
+![Screenshot 2024-10-06 034614](https://github.com/user-attachments/assets/bb191be2-c97a-4897-b2e9-26b0f8b12b67)
