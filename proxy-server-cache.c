@@ -21,7 +21,7 @@
 #define MAX_BYTES 4096                  // max allowed size of request/response
 #define MAX_CLIENTS 400                 // max number of client requests served at a time
 #define MAX_SIZE 200 * (1 << 20)        // size of the cache
-#define MAX_ELEMENT_SIZE 10 * (1 << 20) // max size of an element in cache
+#define MAX_ELEMENT_SIZE 10 * (1 << 20) // max size of an element in cache 
 
 typedef struct cache_element cache_element;
 
