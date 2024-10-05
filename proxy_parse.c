@@ -3,7 +3,7 @@
   COS 461
 */
 
-#include "proxy-parse.h"
+#include "proxy_parse.h"
 
 #define DEFAULT_NHDRS 8
 #define MAX_REQ_LEN 65535
