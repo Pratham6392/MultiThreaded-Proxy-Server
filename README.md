@@ -25,4 +25,19 @@
 
 
 
+
+
+![Screenshot 2024-10-06 040054](https://github.com/user-attachments/assets/04879bfb-2232-48bb-b58e-57cfe11fe76b)
+
+
+
+
+
+
+
+
+
+
+
+
 ![Screenshot 2024-10-06 035746](https://github.com/user-attachments/assets/2129c480-566c-4e22-84c1-00dbbd87653b)
